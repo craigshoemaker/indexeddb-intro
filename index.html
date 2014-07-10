@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <style>
+            ul {
+                margin-top: 25px;
+            }
+        </style>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js"></script>
+    </head>
+    <body class="container">
+        <h1>Tasks</h1>
+        <button id="clear-all-button" class="btn btn-default btn-sm">Clear All</button>
+        <div class="row">
+            <div class="col-sm-3">
+                <ul id="list-container"></ul>
+            </div>
+            <div class="col-sm-8">
+                <input 
+                       id="title-text"
+                       type="text" 
+                       class="form-control"
+                       placeholder="title" /><br />
+                
+                <textarea 
+                          id="notes-text" 
+                          class="form-control"
+                          placeholder="text"></textarea><br />
+                <a href="#" id="clear-button">Clear</a> <button id="save-button" class="btn btn-default">Save</button>
+            </div>
+        </div>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="index.js" type="text/javascript"></script>
+    </body>
+</html>
