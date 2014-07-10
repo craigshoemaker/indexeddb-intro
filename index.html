@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en-US">
     <head>
         <meta charset="utf-8">
@@ -7,34 +7,79 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/fonts/FontAwesome.otf">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/fonts/fontawesome-webfont.eot">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/fonts/fontawesome-webfont.svg">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/fonts/fontawesome-webfont.ttf">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/fonts/fontawesome-webfont.woff">
         <style>
-            ul {
+            .push-down {
                 margin-top: 25px;
+            }
+            
+            h1 {
+                text-align: center;
+                text-transform: uppercase;
+                color:#666;
+            }
+            
+            ul li {
+                font-size: 1.35em;
+                margin-top: 1em;
+                margin-bottom: 1em;
+            }
+            
+            i[data-id] {
+                cursor: pointer;
+                color: #eee;
+            }
+            
+            i[data-id]:hover {
+                color: #c75a6d;
+            }
+            
+            #save-button {
+                margin-left: 10px;
             }
         </style>
         <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js"></script>
     </head>
     <body class="container">
         <h1>Tasks</h1>
-        <button id="clear-all-button" class="btn btn-default btn-sm">Clear All</button>
         <div class="row">
             <div class="col-sm-3">
-                <ul id="list-container"></ul>
+                <ul id="list-container" class="list-unstyled"></ul>
+                <hr />
+                <a id="delete-all-button" 
+                   class="btn btn-default btn-xs">
+                    <i class="fa fa-trash-o"></i> Delete All</a>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-8 push-down">
                 <input 
                        id="title-text"
                        type="text" 
                        class="form-control"
+                       tabindex="1"
                        placeholder="title" /><br />
                 
                 <textarea 
                           id="notes-text" 
                           class="form-control"
-                          placeholder="text"></textarea><br />
-                <a href="#" id="clear-button">Clear</a> <button id="save-button" class="btn btn-default">Save</button>
+                          tabindex="2"
+                          placeholder="text"></textarea>
+                
+                <div class="pull-right push-down">
+                    
+                    <a href="#" id="clear-button" tabindex="4">Clear</a>
+                    
+                    <button id="save-button"
+                            tabindex="3"
+                            class="btn btn-default">
+                                <i class="fa fa-save"></i> Save</button>
+                </div>
             </div>
-        </div>
+        </div>   
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="index.js" type="text/javascript"></script>
     </body>

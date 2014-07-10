@@ -8,7 +8,7 @@
 
     $(function(){
         var 
-            $clearAllButton = $('#clear-all-button'),
+            $deleteAllButton = $('#delete-all-button'),
             $titleText = $('#title-text'),
             $notesText = $('#notes-text'),
             $clearButton = $('#clear-button'),
@@ -18,9 +18,14 @@
         var bindData = function(){
             $listContainer.html('');
             data.forEach(function(note){
-                $listContainer.append('<li><a href="#" data-id="' + note.id + '">'+ note.title +'</a> ' +
-                                      '<button data-id="'+ note.id +'" class="btn btn-default btn-sm">x</button></li>');
+                $listContainer.append('<li><i data-id="' + note.id + '" class="fa fa-minus-circle"></i> '+
+                                      '<a href="#" data-id="' + note.id + '">'+ note.title +'</a></li>');
             });
+        };
+        
+        var clearUI = function(){
+            $titleText.val('');
+            $notesText.val('');
         };
         
         bindData();
@@ -32,11 +37,17 @@
             return false;
         });
         
+        $('i[data-id]').click(function(e){
+            e.preventDefault();
+            var id = $(e.currentTarget).attr('data-id');
+            debugger;
+            return false;
+        });
+        
         $clearButton.click(function(e){
             e.preventDefault();
             
-            $titleText.val('');
-            $notesText.val('');
+            clearUI();
             
             return false;
         });
@@ -50,8 +61,14 @@
             };
             
             data.push(note);
-            
             bindData();
+            clearUI();
+        });
+        
+        $deleteAllButton.click(function(e){
+            e.preventDefault();
+            alert('delete all');
+            return false;
         });
         
     });
