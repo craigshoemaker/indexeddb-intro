@@ -1,4 +1,5 @@
-(function($, app){
+// index.ui.js
+;(function($, app){
     
     'use strict';
 
@@ -28,7 +29,12 @@
         var success = function(){ alert('success'); };
         var failure = function(){ alert('failure'); };
         
-        app.db.getAll(bindData, failure);
+        app.db.errorHandler = function(e){
+            alert('error: ' + e.target.code);
+            debugger;
+        };
+        
+        app.db.getAll(bindData);
         
         $('a[data-id]').click(function(e){
             e.preventDefault();
@@ -54,14 +60,13 @@
 
             var note = {
                 title: $titleText.val(),
-                text: $notesText.val(),
-                id: (new Date()).getTime()
+                text: $notesText.val()
             };
             
-            app.db.save(note, success, failure);
-            
-            app.db.getAll(bindData, failure);
-            clearUI();
+            app.db.save(note, function(){
+                app.db.getAll(bindData);
+                clearUI();
+            });
         });
         
         $deleteAllButton.click(function(e){

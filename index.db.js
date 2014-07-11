@@ -1,4 +1,5 @@
-(function(window, $){
+// index.db.js
+;(function(window, $){
     
     'use strict';
     
@@ -24,7 +25,7 @@
         instance: {},
 
         upgrade: function(e) {
-            debugger;
+
             var _db = e.target.result;
             
             if(!_db.objectStoreNames.contains(db.objectStoreName)){
@@ -39,7 +40,15 @@
             debugger;
         },
         
-        open: function(success, failure){
+        getObjectStore: function(mode){
+            var mode = mode || 'readonly';
+            var txn = db.instance.transaction([db.objectStoreName], mode);
+            var store = txn.objectStore(db.objectStoreName);
+            
+            return store;
+        },
+        
+        open: function(callback){
             
             var request = window.indexedDB.open(
                             db.objectStoreName, 
@@ -52,25 +61,20 @@
             request.onsuccess = function(e){
                 db.instance = request.result;
                 db.instance.onerror = db.errorHandler;
-                success();
+                callback();
             };
         },
         
-        save: function(note, success, failure){
+        save: function(note, callback){
 
             db.open(function(){
                 
-                debugger;
-                
-                var txn = db.instance.transaction([db.objectStoreName], 'readwrite');
-
-                var
-                    store = txn.objectStore(db.objectStoreName),
+                var 
+                    store = db.getObjectStore('readwrite'),
                     request = store.add(note);
 
                 request.onsuccess = function (e) {
-                    debugger;
-                    success();
+                    callback();
                 };
             });
         },
@@ -79,14 +83,28 @@
             alert('delete: ' + id);
         },
         
-        getAll: function(success, failure){
-            var data = [
-                { id: 1, title: 'Test One', text: 'This is a test one' },
-                { id: 2, title: 'Test Two', text: 'This is a test two' },
-                { id: 3, title: 'Test Three', text: 'This is a test three' }
-            ];
+        getAll: function(callback){
             
-            success(data);
+            db.open(function(){
+                
+                var 
+                    store = db.getObjectStore(),
+                    cursor = store.openCursor(),
+                    data = [];
+
+                cursor.onsuccess = function (e) {
+
+                    var result = e.target.result;
+
+                    if (result !== null) {
+                        data.push(result.value);
+                        result.continue();
+                    } else {
+                        callback(data);
+                    }
+                };
+            
+            });
         },
         
         get: function(id, success, failure){
