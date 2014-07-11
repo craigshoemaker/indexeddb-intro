@@ -1,12 +1,9 @@
-(function($){
+(function($, app){
     
-    var data = [
-        { id: 1, title: 'Test One', text: 'This is a test one' },
-        { id: 2, title: 'Test Two', text: 'This is a test two' },
-        { id: 3, title: 'Test Three', text: 'This is a test three' }
-    ];
+    'use strict';
 
     $(function(){
+        
         var 
             $deleteAllButton = $('#delete-all-button'),
             $titleText = $('#title-text'),
@@ -15,10 +12,10 @@
             $saveButton = $('#save-button'),
             $listContainer = $('#list-container');
         
-        var bindData = function(){
+        var bindData = function(data){
             $listContainer.html('');
             data.forEach(function(note){
-                $listContainer.append('<li><i data-id="' + note.id + '" class="fa fa-minus-circle"></i> '+
+                $listContainer.append('<li><i data-id="' + note.id + '" class="fa fa-minus-circle"></i> ' +
                                       '<a href="#" data-id="' + note.id + '">'+ note.title +'</a></li>');
             });
         };
@@ -28,27 +25,28 @@
             $notesText.val('');
         };
         
-        bindData();
+        var success = function(){ alert('success'); };
+        var failure = function(){ alert('failure'); };
+        
+        app.db.getAll(bindData, failure);
         
         $('a[data-id]').click(function(e){
             e.preventDefault();
             var id = $(e.currentTarget).attr('data-id');
-            debugger;
+            app.db.get(id, success, failure);
             return false;
         });
         
         $('i[data-id]').click(function(e){
             e.preventDefault();
             var id = $(e.currentTarget).attr('data-id');
-            debugger;
+            app.db.delete(id, success, failure);
             return false;
         });
         
         $clearButton.click(function(e){
             e.preventDefault();
-            
             clearUI();
-            
             return false;
         });
         
@@ -57,21 +55,22 @@
             var note = {
                 title: $titleText.val(),
                 text: $notesText.val(),
-                id: data.length
+                id: (new Date()).getTime()
             };
             
-            data.push(note);
-            bindData();
+            app.db.save(note, success, failure);
+            
+            app.db.getAll(bindData, failure);
             clearUI();
         });
         
         $deleteAllButton.click(function(e){
             e.preventDefault();
-            alert('delete all');
+            app.db.deleteAll();
             return false;
         });
         
     });
     
     
-}(jQuery));
+}(jQuery, window.app));
