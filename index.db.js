@@ -79,12 +79,13 @@
         },
         
         'delete': function(id, callback){
+            
+            id = parseInt(id);
 
             var 
                 store = db.getObjectStore('readwrite'),
                 request = store.delete(id);
 
-            
             request.onsuccess = callback;
         },
         
@@ -113,6 +114,9 @@
         },
         
         get: function(id, callback){
+            
+            id = parseInt(id);
+            
             db.open(function(){
 
                 var 
