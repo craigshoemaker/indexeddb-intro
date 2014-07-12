@@ -1,7 +1,8 @@
 // index.db.js
 ;(function(window){
     
-    'use strict';
+    // 'use strict'; 
+    // ** IE won't let you use strict mode and re-assign to window.indexdDB
     
     window.indexedDB =  window.indexedDB || 
                         window.mozIndexedDB || 
