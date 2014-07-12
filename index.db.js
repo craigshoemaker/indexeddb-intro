@@ -103,7 +103,7 @@
 
                     var result = e.target.result;
 
-                    if (result !== null) {
+                    if (result && result !== null) {
                         data.push(result.value);
                         result.continue();
                     } else {
