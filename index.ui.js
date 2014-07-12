@@ -9,6 +9,7 @@
             $deleteAllButton = $('#delete-all-button'),
             $titleText = $('#title-text'),
             $notesText = $('#notes-text'),
+            $idHidden = $('#id-hidden'),
             $clearButton = $('#clear-button'),
             $saveButton = $('#save-button'),
             $listContainer = $('#list-container');
@@ -19,11 +20,13 @@
                 $listContainer.append('<li><i data-id="' + note.id + '" class="fa fa-minus-circle"></i> ' +
                                       '<a href="#" data-id="' + note.id + '">'+ note.title +'</a></li>');
             });
+            bindI();
         };
         
         var clearUI = function(){
             $titleText.val('');
             $notesText.val('');
+            $idHidden.val('');
         };
         
         var success = function(){ alert('success'); };
@@ -36,19 +39,35 @@
         
         app.db.getAll(bindData);
         
-        $('a[data-id]').click(function(e){
-            e.preventDefault();
-            var id = $(e.currentTarget).attr('data-id');
-            app.db.get(id, success, failure);
-            return false;
-        });
         
-        $('i[data-id]').click(function(e){
-            e.preventDefault();
-            var id = $(e.currentTarget).attr('data-id');
-            app.db.delete(id, success, failure);
-            return false;
-        });
+        
+        var bindI = function(){
+            
+            $('a[data-id]').click(function(e){
+                debugger;
+                e.preventDefault();
+                var id = $(e.currentTarget).attr('data-id');
+                id = parseInt(id);
+                app.db.get(id, function(note){
+                    debugger;
+                    $titleText.val(note.title);
+                    $notesText.val(note.text);
+                    $idHidden.val(note.id);
+                });
+                return false;
+            });
+            
+            $('i[data-id]').click(function(e){
+                debugger;
+                e.preventDefault();
+                var id = $(e.currentTarget).attr('data-id');
+                id = parseInt(id);
+                app.db.delete(id, function(){
+                    app.db.getAll(bindData);
+                });
+                return false;
+            });
+        };
         
         $clearButton.click(function(e){
             e.preventDefault();
@@ -62,6 +81,10 @@
                 title: $titleText.val(),
                 text: $notesText.val()
             };
+            
+            if($idHidden.val() !== ''){
+                note.id = parseInt($idHidden.val());
+            }
             
             app.db.save(note, function(){
                 app.db.getAll(bindData);

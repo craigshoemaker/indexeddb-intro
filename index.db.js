@@ -69,18 +69,25 @@
 
             db.open(function(){
                 
-                var 
-                    store = db.getObjectStore('readwrite'),
-                    request = store.add(note);
+                var store = db.getObjectStore('readwrite'),
+                    request;
+                
+                debugger;
+                
+                request = note.id ? store.put(note) : store.add(note);
 
-                request.onsuccess = function (e) {
-                    callback();
-                };
+                request.onsuccess = callback;
             });
         },
         
-        'delete': function(id, success, failure){
-            alert('delete: ' + id);
+        'delete': function(id, callback){
+
+            var 
+                store = db.getObjectStore('readwrite'),
+                request = store.delete(id);
+
+            
+            request.onsuccess = callback;
         },
         
         getAll: function(callback){
@@ -107,8 +114,17 @@
             });
         },
         
-        get: function(id, success, failure){
-            alert('get: ' + id);
+        get: function(id, callback){
+            db.open(function(){
+                debugger;
+                var 
+                    store = db.getObjectStore(),
+                    request = store.get(id);
+                
+                request.onsuccess = function(e){
+                    callback(e.target.result);
+                };
+            });
         },
         
         deleteAll: function(){
