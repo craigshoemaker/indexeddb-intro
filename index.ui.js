@@ -94,7 +94,9 @@
         
         $deleteAllButton.click(function(e){
             e.preventDefault();
-            app.db.deleteAll();
+            app.db.deleteAll(function(){
+                $listContainer.html('');
+            });
             return false;
         });
         

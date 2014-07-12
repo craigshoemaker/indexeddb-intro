@@ -72,8 +72,6 @@
                 var store = db.getObjectStore('readwrite'),
                     request;
                 
-                debugger;
-                
                 request = note.id ? store.put(note) : store.add(note);
 
                 request.onsuccess = callback;
@@ -116,7 +114,7 @@
         
         get: function(id, callback){
             db.open(function(){
-                debugger;
+
                 var 
                     store = db.getObjectStore(),
                     request = store.get(id);
@@ -127,8 +125,15 @@
             });
         },
         
-        deleteAll: function(){
-            alert('deleteAll');
+        deleteAll: function(callback){
+            db.open(function(){
+
+                var 
+                    store = db.getObjectStore('readwrite'),
+                    request = store.clear();
+                
+                request.onsuccess = callback;
+            });
         }
     };
     
