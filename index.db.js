@@ -1,5 +1,5 @@
 // index.db.js
-;(function(window, $){
+;(function(window){
     
     'use strict';
     
@@ -144,4 +144,4 @@
     window.app = window.app || {};
     window.app.db = db;
 
-}(window, jQuery));
+}(window));
