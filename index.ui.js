@@ -38,6 +38,7 @@
             $idHidden.val('');
         };
         
+        // select individual item
         $listContainer.on('click', 'a[data-id]', function(e){
             e.preventDefault();
             var id = $(e.currentTarget).attr('data-id');
@@ -49,11 +50,13 @@
             return false;
         });
 
+        // delete item
         $listContainer.on('click', 'i[data-id]', function(e){
             e.preventDefault();
             var id = $(e.currentTarget).attr('data-id');
             app.db.delete(id, function(){
                 app.db.getAll(bindData);
+                clearUI();
             });
             return false;
         });
@@ -86,6 +89,7 @@
             app.db.deleteAll(function(){
                 $listContainer.html('');
                 addNoTasksMessage();
+                clearUI();
             });
             return false;
         });
