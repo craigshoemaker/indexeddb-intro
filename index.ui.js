@@ -2,13 +2,14 @@
 ;(function($, Modernizr, app){
     
     'use strict';
-    
-    if(!Modernizr.indexeddb){
-        $('#unsupported-message').show();
-        $('#ui-container').hide();
-    }
 
     $(function(){
+        
+        if(!Modernizr.indexeddb){
+            $('#unsupported-message').show();
+            $('#ui-container').hide();
+            return;
+        }
         
         var 
             $deleteAllButton = $('#delete-all-button'),
