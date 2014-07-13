@@ -1,19 +1,17 @@
-// index.db.js
-;(function(window){
-    
-    window.indexedDB =  window.indexedDB || 
-                        window.mozIndexedDB || 
-                        window.webkitIndexedDB || 
-                        window.msIndexedDB;
-            
-    window.IDBTransaction =  window.IDBTransaction || 
-                             window.webkitIDBTransaction || 
-                             window.msIDBTransaction;
-            
-    window.IDBKeyRange = window.IDBKeyRange || 
-                         window.webkitIDBKeyRange || 
-                         window.msIDBKeyRange;
-}(window));
+;// index.db.js
+
+window.indexedDB =  window.indexedDB || 
+                    window.mozIndexedDB || 
+                    window.webkitIndexedDB || 
+                    window.msIndexedDB;
+
+window.IDBTransaction =  window.IDBTransaction || 
+                         window.webkitIDBTransaction || 
+                         window.msIDBTransaction;
+
+window.IDBKeyRange = window.IDBKeyRange || 
+                     window.webkitIDBKeyRange || 
+                     window.msIDBKeyRange;
 
 (function(window){
     
@@ -32,9 +30,7 @@
             var _db = e.target.result;
             
             if(!_db.objectStoreNames.contains(db.objectStoreName)){
-                _db.createObjectStore(
-                    db.objectStoreName, 
-                    { keyPath: 'id', autoIncrement: true});
+                _db.createObjectStore(db.objectStoreName, { keyPath: 'id', autoIncrement: true});
             }
         },
         
@@ -44,18 +40,18 @@
         },
         
         getObjectStore: function(mode){
-            var mode = mode || 'readonly';
-            var txn = db.instance.transaction([db.objectStoreName], mode);
-            var store = txn.objectStore(db.objectStoreName);
+            
+            var 
+                mode = mode || 'readonly',
+                txn = db.instance.transaction([db.objectStoreName], mode),
+                store = txn.objectStore(db.objectStoreName);
             
             return store;
         },
         
         open: function(callback){
             
-            var request = window.indexedDB.open(
-                            db.objectStoreName, 
-                            db.version);
+            var request = window.indexedDB.open(db.objectStoreName, db.version);
             
             request.onerror = db.errorHandler;
             
@@ -136,6 +132,7 @@
         },
         
         deleteAll: function(callback){
+            
             db.open(function(){
 
                 var 
@@ -144,6 +141,7 @@
                 
                 request.onsuccess = callback;
             });
+            
         }
     };
     
