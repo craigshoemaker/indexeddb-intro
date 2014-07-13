@@ -1,7 +1,12 @@
 // index.ui.js
-;(function($, app){
+;(function($, Modernizr, app){
     
     'use strict';
+    
+    if(!Modernizr.indexeddb){
+        $('#unsupported-message').show();
+        $('#ui-container').hide();
+    }
 
     $(function(){
         
@@ -104,4 +109,4 @@
     });
     
     
-}(jQuery, window.app));
+}(jQuery, Modernizr, window.app));
