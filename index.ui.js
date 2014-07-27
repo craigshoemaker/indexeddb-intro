@@ -24,14 +24,14 @@
           $listContainer = $('#list-container'),
           $noteTemplate = $('#note-template'),
           $emptyNote = $('#empty-note');
-        ;
         
         var addNoTasksMessage = function(){
             $listContainer.append(
                 $emptyNote.html());
         };
         
-        var bindData = function(data){
+        var bindData = function (data) {
+
             $listContainer.html('');
             
             if(data.length === 0){
@@ -48,7 +48,7 @@
         };
         
         var clearUI = function(){
-            $titleText.val('');
+            $titleText.val('').focus();
             $notesText.val('');
             $idHidden.val('');
         };
@@ -115,14 +115,13 @@
 
             var id = $idHidden.val();
             
-            if($idHidden.val() !== ''){
+            if(id !== ''){
                 note.id = parseInt(id);
             }
             
             app.db.save(note, function(){
                 app.db.getAll(bindData);
                 clearUI();
-                $titleText.focus();
             });
         });
         

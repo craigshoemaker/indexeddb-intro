@@ -29,9 +29,8 @@ window.IDBKeyRange = window.IDBKeyRange ||
 
         upgrade: function (e) {
 
-            var _db = e.target.result;
-
             var
+                _db = e.target.result,
                 names = _db.objectStoreNames,
                 name = db.objectStoreName;
 
