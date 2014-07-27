@@ -60,7 +60,7 @@
         <div id="ui-container" class="row">
             <div class="col-sm-3">
                 
-                <a href="#" id="delete-all-button" class="btn-xs">
+                <a href="#" id="delete-all-btn" class="btn-xs">
                     <i class="fa fa-trash-o"></i> Delete All</a>
                 
                 <hr/>
@@ -100,6 +100,15 @@
             <a href="http://craigshoemaker.net" target="_blank">Craig Shoemaker</a>
             <a href="http://twitter.com/craigshoemaker" target="_blank"><i class="fa fa-twitter"></i></a>
         </footer>
+        <script id="note-template" type="text/template">
+            <li>
+                <i data-id="ID" class="fa fa-minus-circle"></i>
+                <a href="#" data-id="ID">TITLE</a>
+            </li>
+        </script>
+        <script id="empty-note" type="text/template">
+            <li class="text-muted small">No tasks</li>
+        </script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="index.db.js" type="text/javascript"></script>
         <script src="index.ui.js" type="text/javascript"></script>
