@@ -52,9 +52,9 @@ window.IDBKeyRange = window.IDBKeyRange ||
 
         getObjectStore: function (mode) {
 
-            var
-                mode = mode || 'readonly',
-                txn, store;
+            var txn, store;
+
+            mode = mode || 'readonly';
                 
             txn = db.instance.transaction(
                 [db.objectStoreName], mode);
