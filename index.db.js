@@ -37,7 +37,7 @@ window.IDBKeyRange = window.IDBKeyRange ||
             if (!names.contains(name)) {
 
                 _db.createObjectStore(
-                    db.objectStoreName,
+                    name,
                     {
                         keyPath: 'id',
                         autoIncrement: true
