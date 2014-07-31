@@ -41,8 +41,8 @@
             
             data.forEach(function (note) {
               var m = $noteTemplate.html();
-              m = m.replace(/ID/g, note.id);
-              m = m.replace(/TITLE/g, note.title);
+              m = m.replace(/{ID}/g, note.id);
+              m = m.replace(/{TITLE}/g, note.title);
               $listContainer.append(m);
             });
         };
