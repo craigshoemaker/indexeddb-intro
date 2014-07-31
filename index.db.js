@@ -46,23 +46,8 @@ window.IDBKeyRange = window.IDBKeyRange ||
         },
 
         errorHandler: function (error) {
-            alert('error: ' + error.target.code);
+            window.alert('error: ' + error.target.code);
             debugger;
-        },
-
-        getObjectStore: function (mode) {
-
-            var txn, store;
-
-            mode = mode || 'readonly';
-                
-            txn = db.instance.transaction(
-                [db.objectStoreName], mode);
-
-            store = txn.objectStore(
-                db.objectStoreName);
-
-            return store;
         },
 
         open: function (callback) {
@@ -83,6 +68,21 @@ window.IDBKeyRange = window.IDBKeyRange ||
 
                 callback();
             };
+        },
+
+        getObjectStore: function (mode) {
+
+            var txn, store;
+
+            mode = mode || 'readonly';
+
+            txn = db.instance.transaction(
+                [db.objectStoreName], mode);
+
+            store = txn.objectStore(
+                db.objectStoreName);
+
+            return store;
         },
 
         save: function (note, callback) {
