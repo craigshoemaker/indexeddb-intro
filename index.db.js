@@ -85,7 +85,7 @@ window.IDBKeyRange = window.IDBKeyRange ||
             return store;
         },
 
-        save: function (note, callback) {
+        save: function (data, callback) {
 
             db.open(function () {
 
@@ -94,9 +94,9 @@ window.IDBKeyRange = window.IDBKeyRange ||
                 
                 store = db.getObjectStore(mode),
 
-                request = note.id ?
-                    store.put(note) :
-                    store.add(note);
+                request = data.id ?
+                    store.put(data) :
+                    store.add(data);
 
                 request.onsuccess = callback;
             });
