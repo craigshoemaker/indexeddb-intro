@@ -102,24 +102,6 @@ window.IDBKeyRange = window.IDBKeyRange ||
             });
         },
 
-        'delete': function (id, callback) {
-
-            id = parseInt(id);
-
-            db.open(function () {
-
-                var
-                    mode = 'readwrite',
-                    store, request;
-
-                store = db.getObjectStore(mode);
-
-                request = store.delete(id);
-
-                request.onsuccess = callback;
-            });
-        },
-
         getAll: function (callback) {
 
             db.open(function () {
@@ -161,6 +143,24 @@ window.IDBKeyRange = window.IDBKeyRange ||
                 request.onsuccess = function (e){
                     callback(e.target.result);
                 };
+            });
+        },
+
+        'delete': function (id, callback) {
+
+            id = parseInt(id);
+
+            db.open(function () {
+
+                var
+                    mode = 'readwrite',
+                    store, request;
+
+                store = db.getObjectStore(mode);
+
+                request = store.delete(id);
+
+                request.onsuccess = callback;
             });
         },
 
