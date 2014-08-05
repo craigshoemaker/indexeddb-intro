@@ -139,15 +139,12 @@
         });
         
         app.db.errorHandler = function (e) {
-
-            alert('error: ' + e.target.code);
-
+            window.alert('error: ' + e.target.code);
             debugger;
         };
         
         app.db.getAll(bindData);
         
     });
-    
     
 }(jQuery, Modernizr, window.app));
