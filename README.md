@@ -1,4 +1,11 @@
-indexeddb-intro
-===============
+# Introduction to IndexedDB: The In-Browser Database
+Applications need data. For most Web applications, data stores are organized and managed on the server and made available to the client via a network request. As browsers become increasingly more capable, so do the options to store and manipulate application data. This code sample demonstrates how to implement persistence using IndexedDB, the in-browser document database.
 
-Introduction to IndexedDB Tutorial
+## Setup
+Make sure you have Bower installed:
+
+    $ npm install -g bower
+
+Then install the Bower dependencies:
+
+    $ bower install
