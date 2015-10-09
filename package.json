@@ -1,0 +1,30 @@
+{
+  "name": "indexeddb-intro",
+  "version": "1.0.0",
+  "description": "Introduction to IndexedDB Tutorial",
+  "main": "index.html",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/craigshoemaker/indexeddb-intro.git"
+  },
+  "keywords": [
+    "indexeddb",
+    "html5"
+  ],
+  "author": "Craig Shoemaker <craig@craigshoemaker.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/craigshoemaker/indexeddb-intro/issues"
+  },
+  "homepage": "https://github.com/craigshoemaker/indexeddb-intro#readme",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-webserver": "^0.9.1"
+  }
+}
