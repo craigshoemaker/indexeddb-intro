@@ -26,8 +26,7 @@
           $emptyNote = $('#empty-note');
         
         var addNoTasksMessage = function(){
-            $listContainer.append(
-                $emptyNote.html());
+            $listContainer.append($emptyNote.html());
         };
         
         var bindData = function (data) {
@@ -101,19 +100,20 @@
         });
         
         $saveButton.click(function (e) {
-
-            var title = $titleText.val();
+            var title, note, id;
+            
+            title = $titleText.val();
 
             if (title.length === 0) {
                 return;
             }
 
-            var note = {
+            note = {
                 title: title,
                 text: $notesText.val()
             };
 
-            var id = $idHidden.val();
+            id = $idHidden.val();
             
             if(id !== ''){
                 note.id = parseInt(id);

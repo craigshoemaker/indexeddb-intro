@@ -35,13 +35,10 @@ window.IDBKeyRange = window.IDBKeyRange ||
                 name = db.objectStoreName;
 
             if (!names.contains(name)) {
-
-                _db.createObjectStore(
-                    name,
-                    {
-                        keyPath: 'id',
-                        autoIncrement: true
-                    });
+                _db.createObjectStore( name, { 
+                    keyPath: 'id', 
+                    autoIncrement: true 
+                });
             }
         },
 
@@ -52,20 +49,14 @@ window.IDBKeyRange = window.IDBKeyRange ||
 
         open: function (callback) {
 
-            var request = window.indexedDB.open(
-                db.objectStoreName, db.version);
+            var request = window.indexedDB.open(db.objectStoreName, db.version);
 
             request.onerror = db.errorHandler;
-
             request.onupgradeneeded = db.upgrade;
-
+            
             request.onsuccess = function (e) {
-
                 db.instance = request.result;
-
-                db.instance.onerror =
-                    db.errorHandler;
-
+                db.instance.onerror = db.errorHandler;
                 callback();
             };
         },
@@ -76,11 +67,8 @@ window.IDBKeyRange = window.IDBKeyRange ||
 
             mode = mode || 'readonly';
 
-            txn = db.instance.transaction(
-                [db.objectStoreName], mode);
-
-            store = txn.objectStore(
-                db.objectStoreName);
+            txn = db.instance.transaction([db.objectStoreName], mode);
+            store = txn.objectStore(db.objectStoreName);
 
             return store;
         },
@@ -93,11 +81,7 @@ window.IDBKeyRange = window.IDBKeyRange ||
                     mode = 'readwrite';
                 
                 store = db.getObjectStore(mode),
-
-                request = data.id ?
-                    store.put(data) :
-                    store.add(data);
-
+                request = data.id ? store.put(data) : store.add(data);
                 request.onsuccess = callback;
             });
         },
@@ -115,14 +99,10 @@ window.IDBKeyRange = window.IDBKeyRange ||
 
                     var result = e.target.result;
 
-                    if (result &&
-                        result !== null) {
-
+                    if (result && result !== null) {
                         data.push(result.value);
                         result.continue();
-
                     } else {
-
                         callback(data);
                     }
                 };
@@ -157,9 +137,7 @@ window.IDBKeyRange = window.IDBKeyRange ||
                     store, request;
 
                 store = db.getObjectStore(mode);
-
                 request = store.delete(id);
-
                 request.onsuccess = callback;
             });
         },
